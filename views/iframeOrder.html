@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<title>Your Orders</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+		<link rel="stylesheet" href="/stylesheets/main.css">
+		<link rel="stylesheet" href="/stylesheets/userorder.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
+		
+	</head>
+	<body>
+		
+		<!-- Orders-->
+		<div class="container">
+			<div class="row head justify-content-center">
+				<H2 class="heading">
+					Your Orders
+				</H2>
+			</div>
+			<% if(orders.length >0){ %>
+				<% orders.forEach(function(order){ %>
+					<div class="row justify-content-center">
+					<div class="bodycol col-12 shadow-lg list-group-item">
+						<div class="row header w-110">
+							<div class="d-none d-md-block">
+								<p class="bg bg-primary p-2 rounded">
+									<strong>Order ID :&nbsp; <%= order._id %></strong>
+								</p>
+							</div>
+							<div class="ml-auto">
+								<button class="btn btn-primary p-2 rounded" data-toggle="collapse" type="button" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+									<i class= "fas fa-map-marker-alt">&nbsp;&nbsp;</i>Track Order
+								</button>
+							</div>
+						</div>
+						<div class="row collapse" id="collapseExample">
+						  <div class="card card-body">
+							  <img class="track center"  src="./images/orderfinal.PNG" alt="order tracker">
+						  </div>
+						</div>
+						<div class="row m-2">
+							<div class="col-2">
+								<img class="order img-thumbnail" src = "./images/order.png" alt ="Order">
+							</div>
+							<div class="col-4">
+								<% var len = order.items.length %>
+								<%if(len == "1"){%>
+									<h4>
+										<%= order.items[0].item.title %>
+									</h4>
+								<% }else{ %>
+									<h4>
+										<%= order.items[0].item.title %> & <%= len %> other items
+									</h4>
+								<% } %>
+								<p class="text-muted">
+									<%= order.user.username %>
+								</p>
+							</div>
+							<div class="col-2">
+								<h4>
+									₹<%= order.cart.TotalPrice %>
+								</h4>
+							</div>
+							<div class="col-4">
+								<h5 class="d-none d-md-block">
+									<% var delivery = order.delDate.toDateString() %>
+									Delivery by <%= delivery%>
+								</h5>
+								<p class="text-muted">
+									<strong class="text-secondary">Shipped To :&nbsp;</strong><%= order.name%>
+								</p>
+							</div>
+						</div>
+						<div class="row footer shadow-lg pr-2 w-110">
+							<div>
+								<p class="p-2 rounded">
+									<strong class="text-secondary">Order on :&nbsp;</strong><%= order.orderDate.toLocaleString() %>
+								</p>
+							</div>
+							<div class="ml-auto">
+								<a href="/redorder/<%=order._id %>"<button class="btn btn-success p-2 rounded">
+									Re-Order
+								</button></a>
+							</div>
+						</div>
+					</div>
+					</div>
+				<% }) %>
+			<% }else{ %>
+				<div class="row justify-content-center">
+					<div class="col-12 text-center list-group-item rounded shadow-lg">
+						<H3>
+							No Order Yet
+						</H3>
+					</div>
+					
+				</div>
+			<% } %>
+			
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!--Navbar-->
+		<div class="shadow p-2 mb-5 bg-white rounded fixed-top">	
+			<nav id="mainNavbar" class="navbar navbar-dark bg-dark navbar-expand-md ">
+				<a href="/" class="navbar-brand"><img class="logo" src="/images/images.jpeg" class="img-fluid"> &nbsp;JG&P&nbsp;&nbsp;&nbsp;</a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navLinks">
+					<ul class="navbar-nav w-100">
+						<li class="nav-item">
+							<a href="/home" class="nav-link">&nbsp;Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="/about" class="nav-link">&nbsp;About</a>
+						</li>
+						<li class="nav-item">
+							<a href="/stationery" class="nav-link">&nbsp;Stat</a>
+						</li>
+						
+						<ul class="ml-auto navbar-nav">
+							<li class="nav-item ">
+								<a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> &nbsp;My Cart
+									<% if(session.cart){ %>
+										<span class="badge badge-secondary"><%= session.cart.TotalQty %></span>
+									<% } %>
+									&nbsp;&nbsp;</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  <i class="fas fa-user"></i>  &nbsp;<%= CurrentUser.fname %>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="#">My Profile</a>
+								  <a class="dropdown-item" href="#">My Orders</a>
+								  <div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/logout">Logout</a>
+								</div>
+							 </li>
+						</ul>
+						
+					</ul>
+				</div>
+			</nav>
+		</div>
+		

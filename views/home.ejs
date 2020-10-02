@@ -1,0 +1,285 @@
+<html>
+	<head>
+		<title>Welcome to JGP</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Oswald:700|Patua+One|Roboto+Condensed:700" rel="stylesheet">
+		<link rel="stylesheet" href="/stylesheets/home.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<!--Navbar-->
+		<div class="shadow p-2 mb-5 bg-white rounded fixed-top">	
+			<nav id="mainNavbar" class="navbar navbar-dark bg-dark navbar-expand-md ">
+				<a href="/" class="navbar-brand"><img class="logo" src="/images/images.jpeg" class="img-fluid"> &nbsp;JG&P&nbsp;&nbsp;&nbsp;</a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navLinks">
+					<ul class="navbar-nav w-100">
+						<li class="nav-item">
+							<a href="/home" class="nav-link">&nbsp;Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="/printing" class="nav-link">&nbsp;Printing</a>
+						</li>
+						<li class="nav-item">
+							<a href="/stationery" class="nav-link">&nbsp;Stationery</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">								Other items</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						 		<a class="dropdown-item" href="#">Calendar</a>
+						  		<a class="dropdown-item" href="#">Magzine</a>
+								<a class="dropdown-item" href="#">Exam Paper Contract</a>
+								<a class="dropdown-item" href="#">Visiting Cards</a>
+							</div>
+						 </li>
+						<ul class="ml-auto navbar-nav">
+							<% if(CurrentUser){ %>
+							<li class="nav-item ">
+								<a href="/cart" class="nav-link"><i class="fa fa-shopping-cart"></i> &nbsp;My Cart
+									<% if(session.cart){ %>
+										<span class="badge badge-secondary"><%= session.cart.TotalQty %></span>
+									<% } %>
+									&nbsp;&nbsp;</a>
+							</li>
+							
+							
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  <i class="fa fa-user"></i>  &nbsp;<%= CurrentUser.fname %>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="/profile">My Profile</a>
+								  <a class="dropdown-item" href="/order">My Orders</a>
+								  <div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/logout">Logout</a>
+								</div>
+								<% } %>
+							 </li>
+							
+						</ul>
+						
+					</ul>
+				</div>
+			</nav>
+		</div>
+		
+		<!--Home Page-->
+		<div class="container-fluid main">
+			<!--Flash message -->
+			<div>
+				<% if(error && error.length >0){ %>
+					<div class="alert alert-danger" role="alert">
+						<%= error %>
+					</div>
+				<% } %>
+				<% if(success && success.length >0){ %>
+					<div class="alert alert-success" role="alert">
+						<%= success %>
+					</div>
+				<% } %>
+			</div>
+		
+			<!--Stationery-->
+			<% if(stationery == null){ %>
+			<% }else{ %>
+			<div class="text-center heading">
+				Stationery<a class="btn btn-danger view float-center " href="/stationery">View All</a>
+			</div>
+					<div id="carouselStat" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner text-center">
+							<div class="carousel-item active">
+								<% for(var i=0;i<4;i++){ %>
+								<div class="card cell">
+									<div class="slider-head card-body">
+										<img class="img-t" src="<%= stationery[i].img %>">
+									</div>
+									<div class="card-footer slider-foot">
+										<p class="title">
+											<u><%= stationery[i].title %></u>
+										</p>
+										<h5 class="price bg bg-danger">
+											<% var total = stationery[i].sale + stationery[i].price %>
+											Rs. <%= stationery[i].price%><% if(total != 0){%><span class="sale">Rs. <%= total%></span><%}%>
+										</h5>
+										<a href="/addtocart/<%= stationery[i]._id %>" class="add"><i><u>Add To Cart</u></i></a>
+										</p>
+									</div>
+								</div>
+							<% } %>
+							</div>
+						<div class="carousel-item">
+								<% for(var i=4;i<stationery.length;i++){ %>
+								<div class="card cell">
+									<div class="slider-head card-body">
+										<img class="img-t" src="<%= stationery[i].img %>">
+									</div>
+									<div class="card-footer slider-foot">
+										<p class="title">
+											<u><%= stationery[i].title %></u>
+										</p>
+										<h5 class="price bg bg-danger">
+											<% var total = stationery[i].sale + stationery[i].price %>
+											Rs. <%= stationery[i].price%><% if(total != 0){%><span class="sale">Rs. <%= total%></span><%}%>
+										</h5>
+										<a href="/addtocart/<%= stationery[i]._id %>" class="add"><i><u>Add To Cart</u></i></a>
+										</p>
+									</div>
+								</div>
+							<% if(i == 7){ i=stationery.length} %>
+							<% } %>
+							</div>
+							
+							<div class="controls pull-right hidden-xs">
+								<a class="left fa fa-chevron-left btn btn-danger" href="#carouselStat"
+									data-slide="prev"></a>
+								<a class="right fa fa-chevron-right btn btn-danger" href="#carouselStat"
+									data-slide="next"></a>
+							</div>
+					</div>
+					</div>
+			<% } %>
+	
+			<!-- Printing -->
+	<% if(certificate == null){ %>
+			<% }else{ %>
+			<div class="text-center heading">
+				Certificates<a class="btn btn-danger view float-center " href="/printing">View All</a>
+			</div>
+					<div id="carouselPrinting" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner text-center">
+							<div class="carousel-item active">
+								<% for(var i=0;i<4;i++){ %>
+								<div class="card cell">
+									<div class="slider-head card-body">
+										<img class="img-t" src="<%= certificate[i].img %>">
+									</div>
+									<div class="card-footer slider-foot">
+										<p class="title">
+											<u><%= certificate[i].title %></u>
+										</p>
+										<h5 class="price bg bg-danger">
+											<% var total = certificate[i].sale + certificate[i].price %>
+											Rs. <%= certificate[i].price%><% if(total != 0){%><span class="sale">Rs. <%= total%></span><%}%>
+										</h5>
+										<a href="/addtocart/<%= certificate[i]._id %>" class="add"><i><u>Add To Cart</u></i></a>
+										</p>
+									</div>
+								</div>
+							<% } %>
+							</div>
+							<div class="carousel-item">
+								<% for(var i=4;i<certificate.length;i++){ %>
+								<div class="card cell">
+									<div class="slider-head card-body">
+										<img class="img-t" src="<%= certificate[i].img %>">
+									</div>
+									<div class="card-footer slider-foot">
+										<p class="title">
+											<u><%= certificate[i].title %></u>
+										</p>
+										<h5 class="price bg bg-danger">
+											<% var total = certificate[i].sale + certificate[i].price %>
+											Rs. <%= certificate[i].price%><% if(total != 0){%><span class="sale">Rs. <%= total%></span><%}%>
+										</h5>
+										<a href="/addtocart/<%= certificate[i]._id %>" class="add"><i><u>Add To Cart</u></i></a>
+										</p>
+									</div>
+								</div>
+							<% if(i == 7){ i=stationery.length} %>
+							<% } %>
+							</div>
+							
+							<div class="controls pull-right hidden-xs">
+								<a class="left fa fa-chevron-left btn btn-danger" href="#carouselPrinting"
+									data-slide="prev"></a>
+								<a class="right fa fa-chevron-right btn btn-danger" href="#carouselPrinting"
+									data-slide="next"></a>
+							</div>
+						</div>
+					</div>
+			<% } %>
+			<!--About-->
+			<div class="about" id="about">
+				<div class="container p-4">
+					<hr class="hr-design">	
+					<h2 class="contact"><i class="fa fa-info-circle"></i>&emsp;About</h2>
+					<p class="para text-light">Jain Graphics and Printers is a family business being in run from past 20 years.It was started from zero and has reached heights 					today.Below two are the people behind this.</p>
+					<div class="row justify-content-center">
+						<div class="col-8 col-md-6 col-lg-4">
+							<div class="card m-3">
+								<div class="card-body">
+									<img class="photo mb-3 shadow-sm" src="./images/profile/arhant.jpg" height="200px">
+									<h5 class="name mb-0">Arhant Jain</h5>
+									<span class="small text-uppercase text-muted">Founder</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-8 col-md-6 col-lg-4">
+							<div class="card m-3">
+								<div class="card-body">
+									<img class="photo mb-3 shadow-sm" src="./images/profile/Kavya.png" height="200px">
+									<h5 class="name mb-0">Kavya Jain</h5>
+									<span class="small text-uppercase text-muted">Developer</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!--Contact-->
+			<div class="contact-section pt-5" id="contact-section">
+				<hr class="hr-design">
+				  <h2 class="contact"><i class="fa fa-phone"></i>&emsp;Contact Us</h2>
+				  <p class="para text-light">Feel free to shout us by feeling the contact form or visiting our social network sites like Fackebook,Whatsapp,Twitter.</p>
+				  <div class="row justify-content-center">
+					<div class="col-md-8 col-md-offset-2">
+					  <form class="form-horizontal" action="/contact" method="post">
+						<div class="form-group">
+						  <label for="exampleInputName2">Name</label>
+						  <input type="text" name="name" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+						</div>
+						<div class="form-group">
+						  <label for="exampleInputEmail2">Email</label>
+						  <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+						</div>
+						<div class="form-group ">
+						  <label for="exampleInputText">Your Message</label>
+						 <textarea class="form-control" name="message" placeholder="Description"></textarea> 
+						</div>
+						<button type="submit" class="btn btn-success">Send Message</button>
+						  <br>or<br>
+						  <a class="btn btn-danger" href = "mailto: arhantjain99@gmail.com?subject = JGP Query &body = type your message">Send an Email</a>
+					  </form>
+
+					  <hr>
+						<h3 class="social">Our Social Sites</h3>
+					  <ul class="list-inline banner-social-buttons">
+						<li class="btnS"><a href="https://www.twitter.com/kavu_kj" class="btn btn-primary btn-lg"><i class="fa fa-twitter"> <span class="network-name"> 							Twitter</span></i></a></li>
+						<li class="btnS"><a href="https://www.instagram.com/kavu_j/" class="btn btn-danger btn-lg"><i class="fa fa-instagram"> <span class="network-name"> 							Instagram</span></i></a></li>
+						<li class="btnS"><a href="https://www.facebook.com/kavuj" class="btn btn-primary btn-lg"><i class="fa fa-facebook"> <span class="network-name"> 							Facebook</span></i></a></li>
+
+					  </ul>
+					</div>
+				  </div>
+			</div>
+        </div>
+		
+		<!-- Navbar toggle function-->
+		<script>
+			$(function () {
+				$(document).scroll(function () {
+					var $nav = $("#mainNavbar");
+					$nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+				});
+			});
+    	</script>
+	</body>
+</html>

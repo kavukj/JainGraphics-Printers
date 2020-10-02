@@ -1,0 +1,77 @@
+
+.container{
+	padding-top:6em;
+	height: 100%;
+	align-content: center;
+}
+
+.card{
+height: 370px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.8) !important;
+}
+
+.heading{
+	color:white;
+	text-align:center;
+}
+
+
+.social-icon a{
+	font-size:60px;
+	margin-left: 10px;
+	color:#FFC312;
+}
+
+.fab{
+	background-color:rgba(0,0,0,0.8) !important;
+}
+
+.social-icon a:hover{
+	color: white;
+	cursor: pointer;
+}
+
+.social-icon{
+	position: absolute;
+	right: 20px;
+	top: -45px;
+}
+
+.input-group-prepend span{
+	width: 50px;
+	background-color: #FFC312;
+	color: black;
+	border:0 !important;
+}
+
+input:focus{
+	outline: 0 0 0 0  !important;
+	box-shadow: 0 0 0 0 !important;
+}
+
+.btn{
+	margin-top:10px;
+	background: #c0392b !important;
+	color: white !important;
+	width: 120px;
+}
+
+.btn:hover{
+	color: black !important;
+	background-color: white !important;
+}
+
+.links{
+	color: white;
+}
+
+.links a{
+	margin-left: 4px;
+}
+
+.card-footer{
+	margin-bottom:20px;
+}

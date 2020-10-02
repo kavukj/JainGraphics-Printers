@@ -1,0 +1,184 @@
+<html>
+	<head>
+		<title>Your Orders</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+		<link rel="stylesheet" href="/stylesheets/main.css">
+		<link rel="stylesheet" href="/stylesheets/userorder.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
+		
+	</head>
+	<body>
+		<!--Navbar-->
+		<div class="shadow p-2 mb-5 bg-white rounded fixed-top">	
+			<nav id="mainNavbar" class="navbar navbar-dark bg-dark navbar-expand-md ">
+				<a href="/" class="navbar-brand"><img class="logo" src="/images/images.jpeg" class="img-fluid"> &nbsp;JG&P&nbsp;&nbsp;&nbsp;</a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navLinks">
+					<ul class="navbar-nav w-100">
+						<li class="nav-item">
+							<a href="/home" class="nav-link">&nbsp;Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="/printing" class="nav-link">&nbsp;Printing</a>
+						</li>
+						<li class="nav-item">
+							<a href="/stationery" class="nav-link">&nbsp;Stationery</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">								Other items</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						 		<a class="dropdown-item" href="#">Calendar</a>
+						  		<a class="dropdown-item" href="#">Magzine</a>
+								<a class="dropdown-item" href="#">Exam Paper Contract</a>
+								<a class="dropdown-item" href="#">Visiting Cards</a>
+							</div>
+						 </li>
+						<ul class="ml-auto navbar-nav">
+							<% if(CurrentUser){ %>
+							<li class="nav-item ">
+								<a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> &nbsp;My Cart
+									<% if(session.cart){ %>
+										<span class="badge badge-secondary"><%= session.cart.TotalQty %></span>
+									<% } %>
+									&nbsp;&nbsp;</a>
+							</li>
+							
+							
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  <i class="fas fa-user"></i>  &nbsp;<%= CurrentUser.fname %>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="/profile">My Profile</a>
+								  <a class="dropdown-item" href="/order">My Orders</a>
+								  <div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/logout">Logout</a>
+								</div>
+								<% } %>
+							 </li>
+							
+						</ul>
+						
+					</ul>
+				</div>
+			</nav>
+		</div>
+		
+		<!-- Orders-->
+		<div class="container">
+			<div class="row head justify-content-center">
+				<H2 class="heading">
+					Your Orders
+				</H2>
+			</div>
+			<% if(orders.length >0){ %>
+				<% orders.forEach(function(order){ %>
+					<div class="row justify-content-center">
+					<div class="bodycol col-12 shadow-lg list-group-item">
+						<div class="row header w-110">
+							<div class="d-block	">
+								<p class="bg bg-primary p-2 rounded">
+									<strong>Order ID :&nbsp; <%= order._id %></strong>
+								</p>
+							</div>
+							<div class="ml-auto">
+								<button class="btn btn-primary p-2 rounded" data-toggle="collapse" type="button" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+									<i class= "fas fa-map-marker-alt">&nbsp;&nbsp;</i>Track Order
+								</button>
+							</div>
+						</div>
+						<div class="row collapse" id="collapseExample">
+						  <div class="card card-body">
+							  <img class="track center"  src="./images/orderfinal.PNG" alt="order tracker">
+						  </div>
+						</div>
+						<div class="row m-2">
+							<div class="col-2">
+								<img class="order img-thumbnail" src = "./images/order.png" alt ="Order">
+							</div>
+							<div class="col-4">
+								<% var len = order.items.length %>
+								<%if(len == "1"){%>
+									<h4>
+										<%= order.items[0].item.title %>
+									</h4>
+								<% }else{ %>
+									<h4>
+										<%= order.items[0].item.title %> & <%= len %> other items
+									</h4>
+								<% } %>
+								<p class="text-muted">
+									<%= order.user.username %>
+								</p>
+							</div>
+							<div class="col-2">
+								<h4>
+									₹<%= order.cart.TotalPrice %>
+								</h4>
+							</div>
+							<div class="col-4">
+								<h5 class="d-none d-md-block">
+									<% var delivery = order.delDate.toDateString() %>
+									Delivery by <%= delivery%>
+								</h5>
+								<p class="text-muted">
+									<strong class="text-secondary">Delivery To :&nbsp;</strong><%= order.name%>
+									<br>
+									<% if(order.street && order.house && order.city && order.state && order.pincode){%>
+										<strong class="text-secondary">Delivery Address :&nbsp;</strong><%= order.house%>, <%= order.street%>, <%= order.city%>,  <%= order.state%>, <%= order.pincode%>
+									<% }else if(order.street && order.house && order.city){ %> 
+									<strong class="text-secondary">Delivery Address :&nbsp;</strong><%= order.house%>, <%= order.street%>, <%= order.city%>
+									<% }else{ %>
+										<strong class="text-secondary">Delivery Address :&nbsp;</strong>Not Found
+									<% } %>
+									
+									
+								</p>
+							</div>
+						</div>
+						<div class="row footer shadow-lg pr-2 w-110">
+							<div>
+								<p class="p-2 rounded">
+									<strong class="text-secondary">Order on :&nbsp;</strong><%= order.orderDate.toLocaleString() %><br>
+								</p>
+							</div>
+							<div class="ml-auto">
+								<a href="/redorder/<%=order._id %>"<button class="btn btn-success p-2 rounded">
+									Re-Order
+								</button></a>
+							</div>
+						</div>
+					</div>
+					</div>
+				<% }) %>
+			<% }else{ %>
+				<div class="row justify-content-center">
+					<div class="col-12 text-center list-group-item rounded shadow-lg">
+						<H3>
+							No Order Yet
+						</H3>
+					</div>
+					
+				</div>
+			<% } %>
+			
+		</div>
+		
+		<!-- Navbar toggle function-->
+		<script>
+			$(function () {
+				$(document).scroll(function () {
+					var $nav = $("#mainNavbar");
+					$nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+				});
+			});
+    	</script>
+	</body>
+</html>

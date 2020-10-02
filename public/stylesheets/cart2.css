@@ -1,0 +1,138 @@
+.heading{
+	border:2px hidden black;
+	border-radius:5px;
+	background-color:#F8F8F8;
+	color:#404040;
+	padding-top: 8px;
+	padding:12px;
+	border-bottom: 1px solid #e1e8ed;
+	font-family: "Helvetica Neue", sans-serif;
+	margin:10px;
+	margin-bottom:20px;
+    font-size: 36px;
+    line-height: 1.5;
+}
+.head{
+	margin:10px;	
+}
+.main-content{
+	border:1px hidden black;
+	border-radius:5px;
+}
+
+.cart-header{
+	display:table;
+	width:100%;
+	padding: 10px 10px;
+    background-color: #454545;
+    border-radius: 4px 4px 0 0;
+}
+
+.cart-header-left{
+	display:table-cell;
+	width:1px;
+	white-space: nowrap;
+	vertical-align:middle;
+}
+.cart-header-mid{
+	display:table-cell;
+	text-align: center;	
+	vertical-align:middle;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height:1.5;
+    font-size: 16px;
+    color: #999999;
+}
+.cart-header-right{
+	display:table-cell;
+	white-space: nowrap;
+	vertical-align:middle;
+	padding-right: 8px;
+	width:1px;
+    text-align: right;
+}
+.content{
+	width:100%;
+	padding: 10px 10px;
+    background-color: #fafafa;
+    border-radius: 4px 4px 0 0;
+	border:2px solid #e0e8e0;
+}
+
+.img-thumbnail{
+	max-height:100px;
+}
+
+.remove{
+	text-align: center;
+	color: red;
+	display: inline-block;
+	display:none;
+	font-family: marketplace-glyphs;
+}
+
+.remove-i{
+	text-decoration:none;
+	color:red;
+	font-size:20px;
+}
+
+.remove-link:hover{
+	color:red;
+}
+.remove-link:hover .remove{
+	font-size:17px;
+	display:block;
+}
+
+.price{
+	margin-top:10px;
+	font-size:22px;
+}
+
+.side-content{
+	background-color:#F8F8F8;
+	border:2px hidden black;
+	border-radius:5px;
+	text-align:center;
+	
+}
+
+.side-header{
+	color:#404040;
+	font-size:22px;
+	padding:10px;
+	margin-bottom:10px;
+}
+.side-price{
+	color:#404040;
+	font-size:22px;
+	margin-bottom:10px;
+}
+
+.checkout{
+	margin:10px;
+	
+}
+
+.inc{
+	padding:10px;
+}
+
+.no-item{
+	display:table;
+	width:100%;
+	margin:12px;
+	margin-left:50px;
+	padding: 10px 10px;
+    background-color: #454545;
+    border-radius: 4px 4px 0 0;
+}
+.no-item-left{
+	display:table-cell;
+	margin:100px;
+}
+.no-item-right{
+	display:table-cell;
+	right:0;
+}

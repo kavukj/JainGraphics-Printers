@@ -1,0 +1,39 @@
+.container{
+	margin-top:8em;
+	padding:2em;
+	background-color:white;
+	border:2px hidden black;
+	border-radius:12px;
+	overflow: auto;
+	box-shadow: 10px 10px #888888;
+}
+
+.btn-group{
+	float:right;
+	display:inline;
+}
+
+.sign{
+	display:inline;
+}
+.orderbtn{
+	float:right;
+}
+
+.headinglist{
+	background-color:#fffacd;
+}
+
+.heading{
+	padding:5px;
+	font-family:Helvetica;
+	font-weight:700;
+}
+.total{
+	padding:5px;
+	font-size:18px;
+}
+
+.payment{
+	
+}

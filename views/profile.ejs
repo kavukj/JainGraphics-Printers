@@ -1,0 +1,148 @@
+<html>
+	<head>
+		<title>Your Profile</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+		<link rel="stylesheet" href="/stylesheets/main.css">
+		<link rel="stylesheet" href="/stylesheets/profile.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
+		
+	</head>
+	<body>
+		<!--Navbar-->
+		<div class="shadow p-2 mb-5 bg-white rounded fixed-top">	
+			<nav id="mainNavbar" class="navbar navbar-dark bg-dark navbar-expand-md ">
+				<a href="/" class="navbar-brand"><img class="logo" src="/images/images.jpeg" class="img-fluid"> &nbsp;JG&P&nbsp;&nbsp;&nbsp;</a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navLinks">
+					<ul class="navbar-nav w-100">
+						<li class="nav-item">
+							<a href="/home" class="nav-link">&nbsp;Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="/printing" class="nav-link">&nbsp;Printing</a>
+						</li>
+						<li class="nav-item">
+							<a href="/stationery" class="nav-link">&nbsp;Stationery</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">								Other items</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						 		<a class="dropdown-item" href="#">Calendar</a>
+						  		<a class="dropdown-item" href="#">Magzine</a>
+								<a class="dropdown-item" href="#">Exam Paper Contract</a>
+								<a class="dropdown-item" href="#">Visiting Cards</a>
+							</div>
+						 </li>
+						<ul class="ml-auto navbar-nav">
+							<% if(CurrentUser){ %>
+							<li class="nav-item ">
+								<a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> &nbsp;My Cart
+									<% if(session.cart){ %>
+										<span class="badge badge-secondary"><%= session.cart.TotalQty %></span>
+									<% } %>
+									&nbsp;&nbsp;</a>
+							</li>
+							
+							
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  <i class="fas fa-user"></i>  &nbsp;<%= CurrentUser.fname %>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="/profile">My Profile</a>
+								  <a class="dropdown-item" href="/order">My Orders</a>
+								  <div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/logout">Logout</a>
+								</div>
+								<% } %>
+							 </li>
+							
+						</ul>
+						
+					</ul>
+				</div>
+			</nav>
+		</div>
+		
+		<!--Profile-->
+		<div class="container">
+			<div class="side">
+				<div class="side-head row rounded">
+					<img class="user" src="./images/profile/user.png" aria-hidden="true"></i>
+					<div class="name">
+						<div class="name-head text-dark">Hello,</div>
+						<div class="name-body"><%= CurrentUser.fname%></div>
+					</div>
+				</div>
+				<div class="side-body row rounded">
+					<div>
+						<div class="b order" id="order">
+							<a id="order" onclick="load()" href="#"><i class="side-i fa fa-folder-open" aria-hidden="true"></i>  &emsp;MY ORDERS &emsp;&emsp;&emsp;&emsp;&emsp; <i class="fa fa-chevron-right" aria-hidden="true"></i> &nbsp; </a>
+						</div>
+						<hr>
+						<div class="b Account" data-toggle="collapse" data-target="#collapseAccount" aria-expanded="false" aria-controls="collapseAccount">
+							<a href="#"><i class="side-i fa fa-user" aria-hidden="true"></i> &emsp; ACCOUNT SETTINGS&emsp;&nbsp; <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+						</div>
+						<div class="b row justify-content-center collapse" id="collapseAccount">
+							<div class="account-link col-10">
+								<a class="a-l" href="#">Personal Information</a><br>
+							</div>
+							<div class="account-link col-10">
+								<a class="a-l" href="#">Manage Address</a><br>
+							</div>
+							<div class="account-link col-10">
+								<a class="a-l" href="#">Pan Card</a>
+							</div>
+						</div>
+						<hr>
+						<div class="b payment" data-toggle="collapse" data-target="#collapsePayment" aria-expanded="false" aria-controls="collapsePayment">
+							<a href="#"><i class="side-i fa fa-credit-card" aria-hidden="true"></i> &emsp;PAYMENTS&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <i class="fa fa-chevron-right" aria-hidden="true"></i> &nbsp; </a>
+						</div>
+						<div class="b row justify-content-center collapse" id="collapsePayment">
+							<div class="account-link col-10">
+								<a class="a-l" href="#">Wallets</a><br>
+							</div>
+							<div class="account-link col-10">
+								<a class="a-l" href="#">Saved Cards</a><br>
+							</div>
+						</div>
+						<hr>
+						<div class="b logout">
+							<a href="/logout"><i class="side-i fa fa-undo" aria-hidden="true"></i>   &emsp; LOGOUT</a>
+						</div>
+						<hr>
+						
+					</div>
+					
+				</div>
+			</div>
+			<div class="main rounded" id="main">
+				
+			</div>
+		</div>
+		
+		<!-- Navbar toggle function-->
+		<script>
+			$(function () {
+				$(document).scroll(function () {
+					var $nav = $("#mainNavbar");
+					$nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+				});
+			});
+    	</script>
+	
+		<!--Load HTML page in div-->
+		<script>
+			function load(){
+			$('#main').load('iframeOrder.html');
+			}
+		</script>
+	</body>
+</html>

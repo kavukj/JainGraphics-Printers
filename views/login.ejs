@@ -1,0 +1,136 @@
+<html>
+	<head>
+		<title>Login Page</title>
+		<link rel="stylesheet" href="/stylesheets/login.css">
+		<link rel="stylesheet" href="/stylesheets/main.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<!-- Navbar-->
+		<div class="shadow p-2 mb-5 bg-white rounded fixed-top">	
+			<nav id="mainNavbar" class="navbar navbar-dark bg-dark navbar-expand-md ">
+				<a href="/" class="navbar-brand"><img class="logo" src="/images/images.jpeg" class="img-fluid"> &nbsp;JG&P&nbsp;&nbsp;&nbsp;</a>
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navLinks">
+					<ul class="navbar-nav w-100">
+						<li class="nav-item">
+							<a href="/home" class="nav-link">&nbsp;Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="/printing" class="nav-link">&nbsp;Printing</a>
+						</li>
+						<li class="nav-item">
+							<a href="/stationery" class="nav-link">&nbsp;Stationery</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">								Other items</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						 		<a class="dropdown-item" href="#">Calendar</a>
+						  		<a class="dropdown-item" href="#">Magzine</a>
+								<a class="dropdown-item" href="#">Exam Paper Contract</a>
+								<a class="dropdown-item" href="#">Visiting Cards</a>
+							</div>
+						 </li>
+						<ul class="ml-auto navbar-nav">
+							<% if(CurrentUser){ %>
+							<li class="nav-item ">
+								<a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> &nbsp;My Cart
+									<% if(session.cart){ %>
+										<span class="badge badge-secondary"><%= session.cart.TotalQty %></span>
+									<% } %>
+									&nbsp;&nbsp;</a>
+							</li>
+							
+							
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  <i class="fas fa-user"></i>  &nbsp;<%= CurrentUser.fname %>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="/profile">My Profile</a>
+								  <a class="dropdown-item" href="/order">My Orders</a>
+								  <div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/logout">Logout</a>
+								</div>
+								<% } %>
+							 </li>
+							
+						</ul>
+						
+					</ul>
+				</div>
+			</nav>
+		</div>
+		
+		<!-- Login Container-->
+		<div class="container">
+			<% if(error && error.length >0){ %>
+				<div class="alert alert-danger" role="alert">
+					<%=error %>
+				</div>
+			<% } %>
+			<% if(success && success.length >0){ %>
+				<div class="alert alert-success" role="alert">
+					<%=success %>
+				</div>
+			<% } %>
+			<div class="d-flex justify-content-center h-100">
+				<div class="card shadow-lg p-2">
+					<div class="card-header">
+						<h3 class="heading">Login</h3>
+						<div class="d-flex justify-content-end social-icon">
+							<span><a href="#"><i class="fab fa-facebook-square"></i></a></span>
+							<span><a href="#"><i class="fab fa-google-plus-square"></i></a></span>
+							<span><a href="#"><i class="fab fa-twitter-square"></i></a></span>
+						</div>
+					</div>
+					<div class="card-body">
+						<form action="#" method="post">
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+								</div>
+								<input type="text" name="username" class="form-control" placeholder="example@gmail.com">
+							</div>
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" name="password" class="form-control" placeholder="Password">
+							</div>
+							<div class="d-flex justify-content-center">
+								<input type="submit" value="Login" class="btn login-btn">
+							</div>
+						</form>
+					</div>
+					<div class="card-footer">
+						<div class="d-flex justify-content-center links">
+							Don't have an account?  &nbsp;<a href="/signup">Sign Up</a>
+						</div>
+						<div class="d-flex justify-content-center">
+							<a href="/forgotpass">Forgot your password?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Navbar toggle function-->
+		<script>
+			$(function () {
+				$(document).scroll(function () {
+					var $nav = $("#mainNavbar");
+					$nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+				});
+			});
+    	</script>
+		
+	</body>
+</html>

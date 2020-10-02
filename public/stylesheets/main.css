@@ -1,0 +1,48 @@
+#mainNavbar {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo{
+	height:40px;
+	width:40px;
+	display:inline;
+}
+
+#mainNavbar .nav-link {
+    color: white;
+}
+
+#mainNavbar .nav-link:hover {
+    color: #00ffff;
+}
+
+#mainNavbar .navbar-brand {
+    color: #fff;
+    font-size: 25px;
+	font-family:serif;
+}
+
+#landing-header{
+	padding-top:25vh;
+	z-index:1;
+	position: relative;
+	text-align: center;
+}
+
+.mainImg{
+	margin:10px;
+	border-radius: 50%;
+}
+
+body{
+	background-image:url('/images/bg.png');	
+	background-size:cover;
+	background-position: center;
+	font-family: 'Numans', sans-serif;
+	overflow:auto;
+}
+
+.container{
+	margin-top:12vh;
+}
