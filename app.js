@@ -22,13 +22,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 
 //mongoose.connect("mongodb://localhost/JGP");
-mon.connect("mongodb+srv://KavyaJain:Kavya@1998@jgp.ec2u4.mongodb.net/JGP?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://KavyaJain:Kavya@1998@jgp.ec2u4.mongodb.net/JGP?retryWrites=true&w=majority", {
 	useNewUrlParser : true,
 	useCreateIndex : true,
 	useUnifiedTopology: true
 	
 });
-mon.connection.on('connected',() => {
+mongoose.connection.on('connected',() => {
 	console.log("Connected to db");
 });
 
