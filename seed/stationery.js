@@ -2,20 +2,33 @@ var StatModel = require("../models/stationery");
 
 var s = [
 	new StatModel({
-		img: "../images/stationery/natrajpencil.jpg",
-		title: "Natraj 621 Pencil Pack(Pack of 10 pencils)",
-		price: "35",
-		sale: "0",
+		img: "../images/stationery/box.jpg",
+		title: "Plastic Pencil Box(Purple)",
+		price: "120",
+		sale: "20",
 		desc: ""
 	}),
 	new StatModel({
-		img: "../images/stationery/camalinpencil.jpg",
-		title: "Camlin Drawing Pencil",
-		price: "45",
-		sale: "0",
+		img: "../images/stationery/diary.jpg",
+		title: "Black Personal Diary 2020 Year(Weekly Divided)",
+		price: "390",
+		sale: "10",
 		desc: ""
 	}),
-	
+	new StatModel({
+		img: "../images/stationery/pen1.jpg",
+		title: "Cello Butterflow Simply Ball Pen Jar",
+		price: "190",
+		sale: "20",
+		desc: ""
+	}),
+	new StatModel({
+		img: "../images/stationery/dp.jpg",
+		title: "Diary and Pen gift set",
+		price: "500",
+		sale: "50",
+		desc: ""
+	})	
 ];
 
 function seedDB(){

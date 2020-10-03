@@ -2,34 +2,19 @@ var CertiModel = require("../models/certificate");
 
 var c = [
 	new CertiModel({
-		img: "../images/certificate/c13.png",
-		title: "Certificate of Merit",
+		img: "../images/certificate/c11.png",
+		title: "Promotional Achievement Certificate",
 		price: "18/Pc",
 		sale: "0",
 		desc: ""
 	}),
 	new CertiModel({
-		img: "../images/certificate/c14.png",
-		title: "Customize Share certificate",
-		price: "11/Pc",
+		img: "../images/certificate/c12.png",
+		title: "Premium & Textured Paper",
+		price: "20/Pc",
 		sale: "0",
 		desc: ""
-	}),
-	new CertiModel({
-		img: "../images/certificate/c15.png",
-		title: "Food Pleasure Resturant certificate",
-		price: "11/Pc",
-		sale: "0",
-		desc: ""
-	}),
-	new CertiModel({
-		img: "../images/certificate/c16.png",
-		title: "Certificate of sportsmanship",
-		price: "30/Pc",
-		sale: "0",
-		desc: ""
-	})
-	
+	})	
 ];
 
 function seedDB(){
