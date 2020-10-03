@@ -38,7 +38,7 @@ function seedDB(){
 		c[i].save(function(err,res){
 			done++;
 			if(done===c.length){
-				exit();
+				return;
 			}
 		});
 	}
