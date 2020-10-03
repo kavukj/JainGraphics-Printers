@@ -34,8 +34,8 @@ mongoose.connection.on('connected',() => {
 	console.log("Connected to db");
 });
 
-SeedDBS();
-SeedDBC();
+//SeedDBS();
+//SeedDBC();
 
 //Passport Configuration
 app.use(require("express-session")({
