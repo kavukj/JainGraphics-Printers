@@ -1,7 +1,4 @@
-var StatModel = require("../models/stationery.js");
-var mongoose   = require("mongoose");
-
-mongoose.connect("mongodb://localhost/JGP");
+var StatModel = require("../models/stationery");
 
 var s = [
 	new StatModel({
@@ -21,16 +18,16 @@ var s = [
 	
 ];
 
-var done=0;
-for(var i=0;i< s.length;i++){
-	s[i].save(function(err,res){
-		done++;
-		if(done===s.length){
-			exit();
-		}
-	});
+function seedDB(){
+	var done=0;
+	for(var i=0;i< s.length;i++){
+		s[i].save(function(err,res){
+			done++;
+			if(done===s.length){
+				exit();
+			}
+		});
+	}	
 }
 
-function exit(){
-	mongoose.disconnect();
-}
+module.exports=seedDB;

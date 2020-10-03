@@ -14,7 +14,7 @@ router.use(fileUpload({
     tempFileDir : '/tmp/'
 }));
 
-router.get("/stationery",function(req,res){
+router.get("/stationery",middleware.isLoggedIn,function(req,res){
 	StatModel.find({},function(err,product){
 		if(err){
 			console.log(err);
@@ -26,7 +26,7 @@ router.get("/stationery",function(req,res){
 	
 });
 
-router.get("/printing",function(req,res){
+router.get("/printing",middleware.isLoggedIn,function(req,res){
 	CertiModel.find({},function(err,product){
 		if(err){
 			console.log(err);
@@ -60,7 +60,7 @@ router.post("/file",function(req,res){
 	}
 })
 
-router.get("/cart",function(req,res){
+router.get("/cart",middleware.isLoggedIn,function(req,res){
 	if(!req.session.cart){
 		res.render("cart2",{p:null});
 		//res.render("cart2");
@@ -126,7 +126,7 @@ router.get("/checkout",function(req,res){
 	}
 })
 
-router.post("/checkout",function(req,res){
+router.post("/checkout",middleware.isLoggedIn,function(req,res){
 	if(!req.session.cart){
 		return redirect("/stationery");
 	}

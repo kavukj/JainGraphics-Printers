@@ -3,7 +3,7 @@ var router = express.Router();
 var OrderModel = require("../models/order");
 var Cart = require("../models/cart")
 
-router.get("/order",function(req,res){
+router.get("/order",middleware.isLoggedIn,function(req,res){
 	OrderModel.find({user:req.user},function(err,orders){
 		if(err){
 			req.flash("Error","Failed to Load your orders");
@@ -22,7 +22,7 @@ router.get("/order",function(req,res){
 	});
 });
 
-router.get("/profile",function(req,res){
+router.get("/profile",middleware.isLoggedIn,function(req,res){
 	res.render("profile");
 });
 

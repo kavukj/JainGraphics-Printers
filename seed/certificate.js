@@ -1,7 +1,4 @@
-var CertiModel = require("../models/certificate.js");
-var mongoose   = require("mongoose");
-
-mongoose.connect("mongodb://localhost/JGP");
+var CertiModel = require("../models/certificate");
 
 var c = [
 	new CertiModel({
@@ -35,16 +32,16 @@ var c = [
 	
 ];
 
-var done=0;
-for(var i=0;i< c.length;i++){
-	c[i].save(function(err,res){
-		done++;
-		if(done===c.length){
-			exit();
-		}
-	});
+function seedDB(){
+	var done=0;
+	for(var i=0;i< c.length;i++){
+		c[i].save(function(err,res){
+			done++;
+			if(done===c.length){
+				exit();
+			}
+		});
+	}
 }
 
-function exit(){
-	mongoose.disconnect();
-}
+module.exports=seedDB;

@@ -23,9 +23,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 
-SeedDBS();
-SeedDBC();
-
 //mongoose.connect("mongodb://localhost/JGP");
 mongoose.connect("mongodb+srv://KavyaJain:Kavya@1998@jgp.ec2u4.mongodb.net/JGP?retryWrites=true&w=majority", {
 	useNewUrlParser : true,
@@ -36,6 +33,9 @@ mongoose.connect("mongodb+srv://KavyaJain:Kavya@1998@jgp.ec2u4.mongodb.net/JGP?r
 mongoose.connection.on('connected',() => {
 	console.log("Connected to db");
 });
+
+SeedDBS();
+SeedDBC();
 
 //Passport Configuration
 app.use(require("express-session")({
