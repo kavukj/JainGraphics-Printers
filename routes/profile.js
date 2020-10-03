@@ -1,7 +1,8 @@
 var express= require("express");
 var router = express.Router();
 var OrderModel = require("../models/order");
-var Cart = require("../models/cart")
+var Cart = require("../models/cart");
+var middleware 	= require("../middleware/middleware");
 
 router.get("/order",middleware.isLoggedIn,function(req,res){
 	OrderModel.find({user:req.user},function(err,orders){
