@@ -45,6 +45,7 @@ body{
 .heading{
 	font-family: "Grand Hotel",cursive;
     font-weight: 500;
+	width:1600px;
     color: #000;
     margin: 0;
     font-size: 2em;
@@ -73,10 +74,11 @@ body{
 	overflow:auto;
 	display:table;
 	border-spacing:25px;
+	width:1600px;
 }
 
 .cell{
-	width:310px;
+	width:350px;
 	height:auto;
 	display:table-cell;
 	padding:5px;
@@ -134,6 +136,7 @@ body{
 .about{
 	background:linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.1)),url('/images/background/smoke.jpg');
 	text-align:center;
+	width:1600px;
 }
 
 .hr-design{
@@ -188,6 +191,7 @@ body{
 
 /* Contact */
 .contact-section{
+	width:1600px;
 	text-align:center;
 	padding:15px;
 	background: linear-gradient(to bottom right, #003366 30%, #ffffff 100%);
