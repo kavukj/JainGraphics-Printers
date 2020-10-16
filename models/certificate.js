@@ -5,7 +5,7 @@ var CertiSchema = new mongoose.Schema({
 	img:String,
 	title:String,
 	desc:String,
-	price:String,
+	price:Number,
 	sale:Number
 });
 

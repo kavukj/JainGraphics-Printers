@@ -72,7 +72,7 @@ router.get("/cart",middleware.isLoggedIn,function(req,res){
 	}
 });
 
-router.get("/addtocart/:id",function(req,res,next){
+router.get("/addtocart/s/:id",function(req,res,next){
 	var productId = req.params.id;
 	var cart = new CartFun(req.session.cart ? req.session.cart :{}) ;
 	StatModel.findById(productId,function(err,prod){
@@ -89,8 +89,25 @@ router.get("/addtocart/:id",function(req,res,next){
 		}
 	})
 });
+router.get("/addtocart/p/:id",function(req,res,next){
+	var productId = req.params.id;
+	var cart = new CartFun(req.session.cart ? req.session.cart :{}) ;
+	CertiModel.findById(productId,function(err,prod){
+		if(err){
+			console.log(err);
+			res.render("home");
+		}
+		else{
+			cart.add(prod,prod.id);
+			req.session.cart = cart;
+			console.log(req.session.cart);
+			res.redirect("/printing"); 
+			
+		}
+	})
+});
 
-router.get("/removefromcart/:id",function(req,res){
+router.get("/removefromcart/s/:id",function(req,res){
 	var prodId = req.params.id;
 	var cart= new CartFun(req.session.cart);
 	StatModel.findById(prodId,function(err,product){
@@ -110,10 +127,31 @@ router.get("/removefromcart/:id",function(req,res){
 		}
 	})
 })
+router.get("/removefromcart/p/:id",function(req,res){
+	var prodId = req.params.id;
+	var cart= new CartFun(req.session.cart);
+	CertiModel.findById(prodId,function(err,product){
+		if(err){
+			console.log(err);
+			req.flash("Error","Unable to remove item");
+			res.redirect("/cart");
+		}
+		else{
+			cart.remove(product,product.id);
+			if(cart.TotalQty==0){
+				delete req.session.cart;
+			}else{
+				req.session.cart=cart;
+			}
+			res.redirect("/cart");
+		}
+	})
+})
+
 
 router.get("/emptycart",function(req,res){
 	delete req.session.cart;
-	res.redirect("/stationery");
+	res.redirect("/home");
 })
 
 router.get("/checkout",function(req,res){

@@ -81,7 +81,7 @@
 					<div class="main-content col-12 col-md-9">
 						<div class="cart-header justify-content-center ">
 								<div class="cart-header-left">
-									<a href="/stationery"><button class="btn btn-secondary">
+									<a href="/home"><button class="btn btn-secondary">
 										Continue Shopping
 									</button></a>
 								</div>
@@ -107,7 +107,11 @@
 									<p class="license text-secondary"><u>Items by Arhant Jain</u></p>
 								</div>
 								<div class="col-md-2 col-sm-3 ml-auto">
-									<a class="remove-link" href="/removefromcart/<%=product.item._id %>"><i class="remove-i fa fa-times"><span class="remove">Remove</span></i></a>
+									<% if(product.item.desc ==="Certi"){%>
+									<a class="remove-link" href="/removefromcart/p/<%=product.item._id %>"><i class="remove-i fa fa-times"><span class="remove">Remove</span></i></a>
+									<% }else{%>
+									<a class="remove-link" href="/removefromcart/s/<%=product.item._id %>"><i class="remove-i fa fa-times"><span class="remove">Remove</span></i></a>
+									<% } %>
 									<p class="price">
 										₹&nbsp;<%=product.price%>
 									</p>
@@ -124,7 +128,7 @@
 							<div class="side-price">
 								₹<%=totalprice%>
 							</div>
-							<a href="/checkout" class="checkout"><button class="checkout btn btn-lg btn-success">Checkout</button></a>
+							<a href="/checkout" class="checkout"><button class="checkout btn btn-md btn-success">Checkout</button></a>
 							<div class="inc text-muted">
 								Price displayed excludes sales tax.
 							</div>

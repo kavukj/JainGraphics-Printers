@@ -102,7 +102,7 @@
 							<ul class="social">
 								<li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 								<li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-								<li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+								<li><a href="/addtocart/s/<%= p._id %>" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
 							</ul>
 							<% if(p.sale != "0" && p.sale.length>0){ %>
 								<span class="product-new-label">Sale</span>
@@ -124,7 +124,7 @@
 								<% } %>
 								
 							</div>
-							<a class="add-to-cart" href="/addtocart/<%= p._id %>">+ Add To Cart</a>
+							<a class="add-to-cart" href="/addtocart/s/<%= p._id %>">+ Add To Cart</a>
 						</div>
 					</div>
 					</div>

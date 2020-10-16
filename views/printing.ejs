@@ -106,7 +106,7 @@
 							<ul class="social">
 								<li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
 								<li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-								<li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+								<li><a href="/addtocart/p/<%= p._id %>" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
 							</ul>
 							<% if(p.sale != "0" && p.sale.length>0){ %>
 								<span class="product-new-label">Sale</span>
@@ -122,13 +122,13 @@
 						</ul>
 						<div class="product-content">
 							<h3 class="title"><a href="#"><%= p.title %></a></h3>
-							<div class="price">₹<%= p.price %>
+							<div class="price">₹<%= p.price %>/Pc
 								<% if(p.sale != "0" && p.sale.length>0){ %>
 									<span>₹<%= p.sale %></span>
 								<% } %>
 								
 							</div>
-							<a class="add-to-cart" href="#">+ Add To Cart</a>
+							<a class="add-to-cart" href="/addtocart/p/<%= p._id %>">+ Add To Cart</a>
 						</div>
 					</div>
 					</div>
